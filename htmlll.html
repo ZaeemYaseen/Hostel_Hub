@@ -108,9 +108,9 @@
                 <label for="lname">Last name:</label>
                 <input type="text" id="lname" name="lname"><br>
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email"><br>
+                <input type="email" id="email" name="email" placeholder="example@email.com"><br>
                 <label for="roll no">Roll No:</label>
-                <input type="text" id="roll no" name="roll no"><br>
+                <input type="text" id="roll no" name="roll no" placeholder="Write with '-' e.g. '___-____' "><br>
             </fieldset>
 
             <br>
@@ -125,7 +125,47 @@
 
             </fieldset>
             <br>
-            <input  type="submit" value="Submit">
+            <input  type="submit" value="Submit" onclick="checkfunction()">
         </form>
+    <script>
+        function checkfunction()
+        {
+            let fname = document.getElementById("fname").value;
+            let lname = document.getElementById("lname").value;
+            let email = document.getElementById("email").value;
+            let rollno = document.getElementById("roll no").value;
+            let ccode = document.getElementById("course code").value;
+            let cname = document.getElementById("course name").value;
+            let batch = rollno.charAt(0)+rollno.charAt(1);
+            let campus = rollno.charAt(2);
+            let roll = rollno.charAt(4)+rollno.charAt(5)+rollno.charAt(6)+rollno.charAt(7)
+            
+            if(fname.length == 0 ||lname.length == 0 ||email.length == 0 ||rollno.length == 0 ||
+            ccode.length == 0 ||cname.length == 0)
+            {
+                alert('Error! Fill all blank spaces.');
+            }
+
+            else
+            {
+                if(/\d/.test(fname) || /\d/.test(lname) || /\d/.test(cname) )
+                {
+                    alert('Error! Your Name/Course Name contains numbers.');
+                }
+                else
+                {
+                    if((rollno.length == 8) && (00<batch<100) && (/^[A-Za-z0-9]*$/.test(roll)) && (rollno.charAt(3) =="-") && (campus=="F" || campus=="f") )
+                    {
+                        alert('CONGRATUALATIONS! Course Registered Successfully.');
+                    }
+                    else
+                    {
+                        alert("Error! Check Entered rollno");
+                    }
+
+                }
+            }
+        }
+    </script>
     </body>
 </html>
