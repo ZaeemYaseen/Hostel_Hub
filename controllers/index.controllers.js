@@ -17,3 +17,8 @@ exports.LogIn = function(req,res)
 {
     res.send("LogIn Page");
 }
+
+exports.forgetpassword = function(req,res)
+{
+    res.send("Forget Password Page");
+}

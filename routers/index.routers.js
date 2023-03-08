@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const {Home,AboutUs,ContactUs,LogIn} = require("../controllers/index.controllers");
+const {Home,AboutUs,ContactUs,LogIn,forgetpassword} = require("../controllers/index.controllers");
 
 router.get("/home",(req,res) =>
 {
@@ -23,4 +23,8 @@ router.get("/login",(req,res) =>
   LogIn(req,res);
 })
 
+router.get("/login/forgetpassword",(req,res) =>
+{
+  forgetpassword(req,res);
+})
 module.exports = router;
