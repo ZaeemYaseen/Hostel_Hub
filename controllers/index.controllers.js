@@ -44,3 +44,20 @@ exports. getGatepass = function(req,res)
     res.send("Gate Pass Page")
 }
 
+//-------------------Umar Kamran PART----------------------------//
+exports.getgym = function(req,res)
+{
+    res.send("GYM Page")
+}
+
+exports. getbusticket = function(req,res)
+{
+    res.send("BUS PAGE Page")
+}
+
+exports. getroomchangereq = function(req,res)
+{
+    res.send("Room change req Page")
+}
+
+

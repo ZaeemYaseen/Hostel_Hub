@@ -1,9 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const {Home,AboutUs,ContactUs,LogIn,forgetpassword} = require("../controllers/index.controllers");
+const {Home,AboutUs,ContactUs,LogIn,forgetpassword, getgym, getbusticket, getroomchangereq} = require("../controllers/index.controllers");
 
 const {getSignUp,getRoomAllotment,getMessAttendance,getGatepass} = require("../controllers/index.controllers");
+
+const {getgym,getbusticket,getroomchangereq} = require("../controllers/index.controllers");
 
 router.get("/home",(req,res) =>
 {
@@ -54,4 +56,23 @@ router.get("/GatePass", (req,res) =>
     getGatepass (req,res);
   }
 )
+//--------Umar Kamran PART--------------//
+router.get("/GYM", (req,res) =>
+  {
+    getgym(req,res);
+  }
+)
+
+router.get("/BUS", (req,res) =>
+  {
+    getbusticket(req,res);
+  }
+)
+
+router.get("/Room Change", (req,res) =>
+  {
+    getroomchangereq(req,res);
+  }
+)
+
 module.exports = router;
