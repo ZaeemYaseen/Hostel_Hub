@@ -1,17 +1,14 @@
 
 # Hostel Management System
 
-HMS is 
+HMS is software solutions used within hostels, in order to carry out key managerial tasks and oversee operations.
 
 
 ## Features
 
-- 
-- 
-- 
-- 
-- 
-- 
+- Admin can see students info
+- Admin can add students
+- students can allocates themselves room 
 
 
 
@@ -53,7 +50,7 @@ open source license
 
 
 ## Contact Info
-Github URL: 
+Github URL: https://github.com/ZaeemYaseen/Web-Programming--Project-.git
 
 Emails
 
@@ -62,13 +59,3 @@ Zaeem Muhammad Yaseen: f200329@cfd.nu.edu.pk
 Hamza Sajjad: f200297@cfd.nu.edu.pk
 
 Umar Kainth: f20 @cfd.nu.edu.pk
-
-## Usage
-
-The usage of such a system can include the following:
-
-- 
-- 
-- 
-- 
--
