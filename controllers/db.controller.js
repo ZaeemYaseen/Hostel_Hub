@@ -10,6 +10,9 @@ const Admin = require("../models/admin.model")
 const User = require("../models/user.model")
 const Complain = require("../models/complain.model")
 const Feedback = require("../models/feedback.model")
+const gym = require("../models/gym.model")
+const mess = require("../models/mess.model")
+const review = require("../models/review.model")
 
 
 const Address = require("ipaddr.js")
@@ -93,6 +96,68 @@ const addInAdminTable = async function(req, res) {
       res.status(500).send(error.message);
     }
   };
+
+  //HAMZA ADD //
+const addIngymTable = async function(req, res) {
+  try {
+    await sequelize.sync();
+    console.log("Admin table created successfully!");
+
+    const gym = await gym.create({
+      //username: req.body.id,
+      //password: req.body.pass
+      name:req.body.nam,
+      password: req.body.pass,
+      gymId:req.body.gyid
+    });
+    console.log(gym);
+    res.send(gym);
+  } catch (error) {
+    console.error("Failed to create a new record : ", error);
+    res.status(500).send(error.message);
+  }
+};
+
+
+const addInmessTable = async function(req, res) {
+  try {
+    await sequelize.sync();
+    console.log("Admin table created successfully!");
+
+    const mess = await mess.create({
+      //username: req.body.id,
+      //password: req.body.pass
+      //name:req.body.nam,
+      //gymId:req.body.gyid
+
+      name: req.body.nam,
+      rollno:req.body.roll
+    });
+    console.log(mess);
+    res.send(mess);
+  } catch (error) {
+    console.error("Failed to create a new record : ", error);
+    res.status(500).send(error.message);
+  }
+};
+
+const addInreviewTable = async function(req, res) {
+  try {
+    await sequelize.sync();
+    console.log("Admin table created successfully!");
+
+    const mess = await mess.create({
+      name: req.body.nam,
+      rollno: req.body.r,
+      type: req.body.typ
+    });
+    console.log(mess);
+    res.send(mess);
+  } catch (error) {
+    console.error("Failed to create a new record : ", error);
+    res.status(500).send(error.message);
+  }
+};
 
 //////--------------------------Delete--------------------
 
@@ -221,6 +286,108 @@ const DeleteUser = (req, res) => {
       });
   };
 
+// HAMZA DELETE // 
+
+const deletegym = (req, res) => {
+  sequelize
+    .sync()
+    .then(() => {
+      gym.destroy({
+        where: {
+          name:req.body.nam
+        },
+      })
+        .then((data) => {
+          console.log("data"+data)
+          if (!data) {
+            console.log("Data With This ID Not Found ");
+            res.send(new error("Invalid ID" , 400))
+          }
+          else
+          {
+          console.log("Successfully deleted record.");
+          res.send("Deleted");
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to delete record : ", error);
+          res.send("error");
+        });
+    })
+    .catch((error) => {
+      console.error("Unable to create table : ", error);
+      res.send("table error");
+    });
+}; 
+
+
+
+const deletemess = (req, res) => {
+  sequelize
+    .sync()
+    .then(() => {
+      mess.destroy({
+        where: {
+          rollno:req.body.roll
+        },
+      })
+        .then((data) => {
+          console.log("data"+data)
+          if (!data) {
+            console.log("Data With This ID Not Found ");
+            res.send(new error("Invalid ID" , 400))
+          }
+          else
+          {
+          console.log("Successfully deleted record.");
+          res.send("Deleted");
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to delete record : ", error);
+          res.send("error");
+        });
+    })
+    .catch((error) => {
+      console.error("Unable to create table : ", error);
+      res.send("table error");
+    });
+}; 
+
+
+
+const deletereview = (req, res) => {
+  sequelize
+    .sync()
+    .then(() => {
+      review.destroy({
+        where: {
+          name: req.body.nam
+        },
+      })
+        .then((data) => {
+          console.log("data"+data)
+          if (!data) {
+            console.log("Data With This ID Not Found ");
+            res.send(new error("Invalid ID" , 400))
+          }
+          else
+          {
+          console.log("Successfully deleted record.");
+          res.send("Deleted");
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to delete record : ", error);
+          res.send("error");
+        });
+    })
+    .catch((error) => {
+      console.error("Unable to create table : ", error);
+      res.send("table error");
+    });
+}; 
+
 /////////----------------------UPDATE------------------
 
 const updateAdminPass = async function(req, res) {
@@ -298,6 +465,45 @@ const UpdateUser = async function(req, res) {
       res.status(500).send(error.message);
     }
   };
+
+  // HAMZA UPDATE //
+const updategym = async function(req, res) {
+  try {
+    await sequelize.sync();
+
+    const gym = await gym.update(
+      {
+          password: req.body.pass,
+      },
+      {
+          where:{name:req.body.nam},
+      });
+    console.log(user);
+    res.send(user);
+  } catch (error) {
+    console.error("Failed to Update Record : ", error);
+    res.status(500).send(error.message);
+  }
+};
+
+const updatemess = async function(req, res) {
+  try {
+    await sequelize.sync();
+
+    const mess = await mess.update(
+      {
+          
+      },
+      {
+          
+      });
+    console.log(user);
+    res.send(user);
+  } catch (error) {
+    console.error("Failed to Update Record : ", error);
+    res.status(500).send(error.message);
+  }
+};
 
 
 
@@ -450,10 +656,126 @@ const GetUser = async (req, res) => {
           res.status(500).send(error.message);
         }
       };
-    
+ 
+   // HAMZA RETRIVE GET 
+
+
+  const getgym = async (req, res) => {
+    try{
+      await sequelize
+      .sync()
+      .then(async() => {
+          await gym.findOne({
+          where: {
+            name:req.body.nam
+          }
+        })
+          .then((data) => {
+            if(!data)
+            {
+              res.send(new errorHandler("Cannot Find Data " , 404))
+            }
+            else{
+            console.log("Data Found.");
+            
+            res.status(200).send(data);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+          });
+      })
+      .catch((error) => {
+        console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+      });
+    }catch{
+      console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+    }
+  };
+
+
+  const getmess = async (req, res) => {
+    try{
+      await sequelize
+      .sync()
+      .then(async() => {
+          await mess.findOne({
+          where: {
+            rollno:req.body.roll
+          }
+        })
+          .then((data) => {
+            if(!data)
+            {
+              res.send(new errorHandler("Cannot Find Data " , 404))
+            }
+            else{
+              console.log("Data Found.");
+            
+              res.status(200).send(data);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+          });
+      })
+      .catch((error) => {
+        console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+      });
+    }catch{
+      console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+    }
+  };
+
+
+
+  const getreview = async (req, res) => {
+    try{
+      await sequelize
+      .sync()
+      .then(async() => {
+          await review.findOne({
+          where: {
+            name: req.body.nam
+          }
+        })
+          .then((data) => {
+            if(!data)
+            {
+              res.send(new errorHandler("Cannot Find Data " , 404))
+            }
+            else{
+            console.log("Data Found.");
+            
+            res.status(200).send(data);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+          });
+      })
+      .catch((error) => {
+        console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+      });
+    }catch{
+      console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+    }
+  };
+
     
 module.exports = {addInUserTable , addInAdminTable ,addinComplainTable,addinFeedbackTable,
 DeleteAdmin, DeleteUser, DeleteComplain, DeleteFeedback,
 updateAdminPass,UpdateUser, UpdateComplain, updateFeedback,
-GetAdmin,GetUser, GetComplain, GetFeedback
+GetAdmin,GetUser, GetComplain, GetFeedback,
+addIngymTable,addInmessTable,addInreviewTable,deletegym,deletemess,
+deletereview,getgym,getmess,getreview,updategym, updatemess
 }
