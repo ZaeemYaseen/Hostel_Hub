@@ -13,7 +13,8 @@ const Feedback = require("../models/feedback.model")
 const gym = require("../models/gym.model")
 const mess = require("../models/mess.model")
 const review = require("../models/review.model")
-
+const complaint = require("../models/complaint.model.js")
+const maintainance = require("../models/maintainance.model")
 
 const Address = require("ipaddr.js")
 
@@ -158,6 +159,42 @@ const addInreviewTable = async function(req, res) {
     res.status(500).send(error.message);
   }
 };
+
+//// UMar
+const addmaintainancetable = async function(req, res) {
+  try {
+    await sequelize.sync();
+    console.log("Maintainance table created successfully!");
+
+    const maintainance = await maintainance.create({
+      name: req.body.nam,
+      description: req.body.des
+    });
+    console.log(maintainance);
+    res.send(maintainance);
+  } catch (error) {
+    console.error("Failed to create a new record : ", error);
+    res.status(500).send(error.message);
+  }
+};
+
+const addcomplainttable = async function(req, res) {
+  try {
+    await sequelize.sync();
+    console.log("Admin table created successfully!");
+
+    const admin = await complaint.create({
+      name: req.body.nam,
+      description: req.body.des
+    });
+    console.log(admin);
+    res.send(admin);
+  } catch (error) {
+    console.error("Failed to create a new record : ", error);
+    res.status(500).send(error.message);
+  }
+};
+
 
 //////--------------------------Delete--------------------
 
@@ -388,6 +425,76 @@ const deletereview = (req, res) => {
     });
 }; 
 
+
+
+/////// UMAR KAINTH
+const Deletecomplaint = (req, res) => {
+  sequelize
+    .sync()
+    .then(() => {
+      complaint.destroy({
+        where: {
+          name: req.body.nam
+        },
+      })
+        .then((data) => {
+          console.log("data"+data)
+          if (!data) {
+            console.log("Data With This ID Not Found ");
+            res.send(new error("Invalid ID" , 400))
+          }
+          else
+          {
+          console.log("Successfully deleted record.");
+          res.send("Deleted");
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to delete record : ", error);
+          res.send("error");
+        });
+    })
+    .catch((error) => {
+      console.error("Unable to create table : ", error);
+      res.send("table error");
+    });
+}; 
+
+
+const Deletemaintainance = (req, res) => {
+  sequelize
+    .sync()
+    .then(() => {
+      maintainance.destroy({
+        where: {
+          name: req.body.nam
+        },
+      })
+        .then((data) => {
+          console.log("data"+data)
+          if (!data) {
+            console.log("Data With This ID Not Found ");
+            res.send(new error("Invalid ID" , 400))
+          }
+          else
+          {
+          console.log("Successfully deleted record.");
+          res.send("Deleted");
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to delete record : ", error);
+          res.send("error");
+        });
+    })
+    .catch((error) => {
+      console.error("Unable to create table : ", error);
+      res.send("table error");
+    });
+}; 
+
+
+
 /////////----------------------UPDATE------------------
 
 const updateAdminPass = async function(req, res) {
@@ -499,6 +606,48 @@ const updatemess = async function(req, res) {
       });
     console.log(user);
     res.send(user);
+  } catch (error) {
+    console.error("Failed to Update Record : ", error);
+    res.status(500).send(error.message);
+  }
+};
+
+
+
+////// Umar Kainth
+const Updatecompaint = async function(req, res) {
+  try {
+    await sequelize.sync();
+
+    const complaint = await complaint.update(
+      {
+          description: req.body.des,
+      },
+      {
+          where:{ name : req.body.nam},
+      });
+    console.log(complaint);
+    res.send(complaint);
+  } catch (error) {
+    console.error("Failed to Update Record : ", error);
+    res.status(500).send(error.message);
+  }
+};  
+
+
+const updatemaintainance = async function(req, res) {
+  try {
+    await sequelize.sync();
+
+    const maintainance = await maintainance.update(
+      {
+          description: req.body.des,
+      },
+      {
+          where:{ name : req.body.nam},
+      });
+    console.log(maintainance);
+    res.send(maintainance);
   } catch (error) {
     console.error("Failed to Update Record : ", error);
     res.status(500).send(error.message);
@@ -771,11 +920,87 @@ const GetUser = async (req, res) => {
     }
   };
 
+
+
+  ////////// Umar Kainth
+  const Getcomplaint = async (req, res) => {
+    try{
+      await sequelize
+      .sync()
+      .then(async() => {
+          await complaint.findOne({
+          where: {
+            name : req.body.nam
+          }
+        })
+          .then((data) => {
+            if(!data)
+            {
+              res.send(new errorHandler("Cannot Find Data " , 404))
+            }
+            else{
+            console.log("Data Found.");
+            res.status(200).send(data);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+          });
+      })
+      .catch((error) => {
+        console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+      });
+    }catch{
+      console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+    }
+  };
+
+
+
+  const Getmaintainance = async (req, res) => {
+    try{
+      await sequelize
+      .sync()
+      .then(async() => {
+          await maintainance.findOne({
+          where: {
+            name : req.body.nam
+          }
+        })
+          .then((data) => {
+            if(!data)
+            {
+              res.send(new errorHandler("Cannot Find Data " , 404))
+            }
+            else{
+            console.log("Data Found.");
+            res.status(200).send(data);
+            }
+          })
+          .catch((error) => {
+            console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+          });
+      })
+      .catch((error) => {
+        console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+      });
+    }catch{
+      console.error("Failed to Get record : ", error);
+      res.status(500).send(error.message);
+    }
+  };
+
+
     
 module.exports = {addInUserTable , addInAdminTable ,addinComplainTable,addinFeedbackTable,
 DeleteAdmin, DeleteUser, DeleteComplain, DeleteFeedback,
 updateAdminPass,UpdateUser, UpdateComplain, updateFeedback,
 GetAdmin,GetUser, GetComplain, GetFeedback,
 addIngymTable,addInmessTable,addInreviewTable,deletegym,deletemess,
-deletereview,getgym,getmess,getreview,updategym, updatemess
+deletereview,getgym,getmess,getreview,updategym, updatemess,addcomplainttable,addmaintainancetable,Deletecomplaint,Deletemaintainance,Updatecompaint,updatemaintainance,Getcomplaint,Getmaintainance
 }
