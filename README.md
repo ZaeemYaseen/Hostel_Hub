@@ -39,7 +39,8 @@ open source license
 
 
 ## Contact Info
-Github URL: https://github.com/ZaeemYaseen/WebProgrammingProject.git
+Github URL: https://github.com/ZaeemYaseen/Hostel_Hub.git
+
 LinkedIn profile: https://www.linkedin.com/in/zaeem-muhammad-yaseen-23211a229/
 
 Emails
