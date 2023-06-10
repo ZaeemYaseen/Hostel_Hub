@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gym Membership Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color:  #272c4a;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      width: 400px;
+      background-color: #f8efef;
+      padding: 10px 30px 30px; /* Adjusted padding-top to 10px */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      animation: slide-in 0.5s ease-in-out;
+    }
+
+    @keyframes slide-in {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group .subscription-options {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .form-group .subscription-options label {
+      margin-right: 10px;
+    }
+
+    .form-group .subscription-options input[type="radio"] {
+      margin-right: 5px;
+    }
+
+    .form-group .subscription-options input[type="radio"]:checked + label {
+      font-weight: bold;
+    }
+
+    .form-group .expiration-date {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #777;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #ff5b56;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #d60a3a;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Gym Membership Form</h2>
+    <form id="gym-form" name ="gymfrom" action="" method="POST">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="roll-no">Roll No:</label>
+        <input type="text" id="roll-no" name="rollno" required>
+      </div>
+      <div class="form-group">
+        <label for="subscription">Subscription:</label>
+        <div class="subscription-options">
+          <input type="radio" id="monthly" name="subscription" value="monthly" required>
+          <label for="monthly">Monthly</label>
+          <input type="radio" id="semester" name="subscription" value="semester" required>
+          <label for="semester">Whole Semester</label>
+        </div>
+        <div class="expiration-date"></div>
+      </div>
+      <input class = "submit-btn" type="submit" value="Submit">
+    </form>
+  </div>
+
+  <!-- <script>
+    // Function to calculate the expiration date based on the selected subscription
+    function calculateExpirationDate() {
+      const today = new Date();
+      const subscriptionInput = document.querySelector('input[name="subscription"]:checked');
+      const expirationDateElement = document.querySelector('.expiration-date');
+
+      if (subscriptionInput) {
+        const subscriptionValue = subscriptionInput.value;
+        const expirationDate = new Date();
+
+        if (subscriptionValue === "monthly") {
+          expirationDate.setMonth(expirationDate.getMonth() + 1);
+        } else if (subscriptionValue === "semester") {
+          expirationDate.setMonth(expirationDate.getMonth() + 6);
+        }
+
+        const formattedExpirationDate = expirationDate.toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+
+        expirationDateElement.textContent = `Membership valid until ${formattedExpirationDate}`;
+      }
+    }
+
+    // Add event listener to the form submission
+    const form = document.getElementById('gym-form');
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      calculateExpirationDate();
+    });
+  </script> -->
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Page</title>
+  <style>
+    body {
+      background-color: #272c4a;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    
+    .login-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 100%;
+    }
+    
+    .login-container h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+    
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+      width: 95%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+    
+    .login-container input[type="submit"]{
+      width: 100%;
+      padding: 10px;
+      background-color: #f7403b;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .login-container input[type="submit"]:hover {
+      background-color: #f7403b;
+    }
+    
+    .register-link {
+      text-align: center;
+      margin-top: 10px;
+    }
+    
+    /* Responsive Styles */
+    @media only screen and (max-width: 600px) {
+      .login-container {
+        padding: 10px;
+      }
+      
+      .login-container input[type="text"],
+      .login-container input[type="password"],
+      .login-container input[type="submit"] {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Admin Login</h2>
+    <form name="loginForm" action=""  method="POST">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+</body>
+</html>

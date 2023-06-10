@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #272c4a;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #19053f;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(63, 13, 107, 0.1);
+      text-align: center;
+    }
+    
+    .container-dark {
+      background-color: #f4eced;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      background-color: #f7403b;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .button:hover {
+      background-color: #ff5b56;
+    }
+
+    .menu-image {
+      margin: 20px auto;
+      max-width: 600px;
+      max-height: 400px;
+      animation: fadeIn 0.5s ease-in-out;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .menu-image:hover {
+      transform: scale(1.1);
+    }
+
+    .options {
+      margin-bottom: 10px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .options label {
+      display: inline-block;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #f7403b;
+      font-size: 18px;
+    }
+
+    .options label b {
+      font-weight: bold;
+    }
+
+    .submit-button {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    .animated-border {
+      display: inline-block;
+      position: relative;
+    }
+    
+    .animated-border::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -3px;
+      width: 0%;
+      height: 2px;
+      background-color: #f7403b;
+      animation: borderExpand 1s ease-in-out infinite;
+      transform: translateX(-50%);
+    }
+    
+    @keyframes borderExpand {
+      0% {
+        width: 0%;
+      }
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0%;
+      }
+    }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var breakfastYes = document.getElementById('breakfastYes').checked;
+      var lunchYes = document.getElementById('lunchYes').checked;
+      var dinnerYes = document.getElementById('dinnerYes').checked;
+      var date = document.getElementById('date').value;
+
+      if (!breakfastYes || !lunchYes || !dinnerYes) {
+        alert("Please select all three meal options.");
+        return false;
+      }
+
+      if (date === "") {
+        alert("Please select a date.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+<body>
+  <div class="container container-dark">
+    <h1 class="animated-border">Welcome to Mess Form!</h1>
+    <form action="" method="POST">
+      <!-- <img id="menuImage" class="menu-image" src="E:\Hostel_hub_prac\mess.png.png" alt="Mess Menu"> -->
+      <div id="options" class="options">
+        <label for="text" style="font-size: 20px;"></label>
+        <input type="text" id="rollno" name="rollno" placeholder="Roll no">
+        <br>
+        <label for="breakfast" style="font-size: 20px;"><b>Breakfast:</b></label>
+        <input type="radio" id="breakfastYes" name="breakfast" value="yes">
+        <label for="breakfastYes">Yes</label>
+        <input type="radio" id="breakfastNo" name="breakfast" value="no">
+        <label for="breakfastNo">No</label>
+        <br>
+        <label for="lunch" style="font-size: 20px;"><b>Lunch:</b></label>
+        <input type="radio" id="lunchYes" name="lunch" value="yes">
+        <label for="lunchYes">Yes</label>
+        <input type="radio" id="lunchNo" name="lunch" value="no">
+        <label for="lunchNo">No</label>
+        <br>
+        <label for="dinner" style="font-size: 20px;"><b>Dinner:</b></label>
+        <input type="radio" id="dinnerYes" name="dinner" value="yes">
+        <label for="dinnerYes">Yes</label>
+        <input type="radio" id="dinnerNo" name="dinner" value="no">
+        <label for="dinnerNo">No</label>
+        <br>
+        <label for="date" style="font-size: 20px;"><b>Date:</b></label>
+        <input type="date" id="date" name="date">
+      </div>
+      <div class="button-container">
+        <button id="submitButton" class="button submit-button" onclick="return validateForm()">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,21 +1,13 @@
 
-# Hostel Management System
+# Hostel Hub
 
-HMS is software solutions used within hostels, in order to carry out key managerial tasks and oversee operations.
+HH is software solutions used within hostels, in order to carry out key managerial tasks and oversee operations.
 
 
 ## Features
 
-- Admin can see students info
-- Admin can add students
-- students can allocates themselves room 
-
-
-
-
-## Documentation
-
-[Documentation]( https://documenter.getpostman.com/view/26623331/2s93Xzxhmy )
+- Admin can see mess list, gym list & students who are allotted rooms and who aren't
+- students can register themselves, mess attendance, gym form and many more
 
 
 ## Technologies
@@ -26,7 +18,6 @@ HMS is software solutions used within hostels, in order to carry out key manager
 - EXPRESSJS
 - MYSQL2
 - SEQUELIZE
-- JEST FOR ERROR HANDLING
 - GITHUB
 
 ## Installation
@@ -34,10 +25,8 @@ HMS is software solutions used within hostels, in order to carry out key manager
 To run this system locally, follow these steps:
 
 - Clone the repository or download the code.
-- Navigate to the project directory and install the dependencies by running npm install.
-- Create a .env file in the project directory with the following variables:
-- Install mysql using xampp
-  
+- Navigate to the project directory and install the dependencies (node, express, body-parser, sequelize, mysql2) by running npm install.
+- Run the program by comand: nodemon index.jx  
     
 ## Feedback
 
@@ -58,4 +47,4 @@ Zaeem Muhammad Yaseen: f200329@cfd.nu.edu.pk
 
 Hamza Sajjad: f200297@cfd.nu.edu.pk
 
-Umar Kainth: f20 @cfd.nu.edu.pk
+Umar Kainth: f201047@cfd.nu.edu.pk
